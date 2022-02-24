@@ -41,7 +41,7 @@ const verifyclasse = (req: Request, res: Response, next: NextFunction) => {
 const verifylevel = (req: Request, res: Response, next: NextFunction) => {
   const { level }: IUser = req.body;
 
-  if (!level) {
+  if (level === undefined) {
     return res.status(StatusCodes.BAD_REQUEST).json({ error: MSG.NOT_LEVEL });
   }
 
@@ -53,7 +53,7 @@ const verifylevel = (req: Request, res: Response, next: NextFunction) => {
   //   return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.LEVEL_NOT_RIGTH });
   // }
 
-  if (!level || level <= 0) {
+  if (level <= 0) {
     return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.LEVEL_NOT_RIGTH });
   }
 

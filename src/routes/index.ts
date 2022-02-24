@@ -1,9 +1,10 @@
 import express from 'express';
+import userRoute from './userRoute';
+import loginRoute from './loginRouter';
 
 const route = express.Router({ mergeParams: true });
 
-import userRoute from './userRoute';
-
 route.use('/users', userRoute);
+route.use('/login', loginRoute);
 
 export default route;

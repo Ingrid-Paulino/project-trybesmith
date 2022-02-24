@@ -30,7 +30,7 @@ afterAll(async () => {
 // Clean database before tests
 beforeAll(async () => { await recreateDatabase(); });
 
-describe.only("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
+describe("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
   // Close connections and server after tests
   afterAll(async () => {
     await dropDatabase();
@@ -172,7 +172,7 @@ describe.only("1 - Crie um endpoint para o cadastro de pessoas usuárias", () =>
 
 
 
-  it('Será validado que é possível cadastrar a pessoa usuária com sucesso', async () => {
+  it.only('Será validado que é possível cadastrar a pessoa usuária com sucesso', async () => {
     const result = await request(app).post("/users").send({
       username: "catiau",
       password: "senha1234",

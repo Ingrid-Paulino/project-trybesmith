@@ -6,6 +6,8 @@ const create = async ({ username, classe, level, password }: IUser): Promise<Use
   // const allUser = await modelUser.getAll();
   // const filterEmail = allUsers.find(({ i }) => i.id === id);
   // if (filterEmail) throw...
+  console.log('oi');
+
   const newUser = await modelUser.create({ username, classe, level, password });
   return newUser;
 };

@@ -14,10 +14,14 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   
   try {
     const newUser: User = await serviceUser.create({ username, classe, level, password });
+    console.log({ newUser });
+    
     const { id } = newUser;
-    const token = await createToken({ id, username });
+    const token = createToken({ id, username });
     res.status(StatusCodes.CREATED).json({ token });
   } catch (error) {
+    console.log({ error });
+    
     next(error);
   }
 };
