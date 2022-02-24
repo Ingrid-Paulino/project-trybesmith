@@ -4,7 +4,8 @@ import { User, IUser } from '../interfaces/userInterface';
 
 // Promise<User> --> Essa função me retorna uma promise com User
 const create = async ({ username, classe, level, password }: IUser): Promise<User> => {
-  const query = 'INSERT INTO Users (username, classe, level, password ) VALUES (?, ?, ?, ?)';
+  const query = 'INSERT INTO Trybesmith.Users (username, classe, level, password )'
+   + 'VALUES (?, ?, ?, ?)';
   const [rowResult] = await connection.execute<ResultSetHeader>(
     query,
     [username, classe, level, password],
