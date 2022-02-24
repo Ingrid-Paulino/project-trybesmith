@@ -1,6 +1,6 @@
 import { ErrorRequestHandler } from 'express';
 
-const errorMiddlewate: ErrorRequestHandler = (err, req, res, _next) => {
+const errorMiddlewate: ErrorRequestHandler = (err, _req, res, _next) => {
 //  console.error('err', err);
 
   if (err.status) {

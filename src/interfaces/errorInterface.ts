@@ -1,4 +1,4 @@
-export default interface Error {
-  status: number;
-  message: string;
-}
+// export default interface Error {
+//   status: number;
+//   message: string;
+// }

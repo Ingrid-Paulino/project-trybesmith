@@ -1,6 +1,4 @@
-import Error from '../interfaces/errorInterface';
-
-const validateErrorObj = (status: Error, message : Error) => ({
+const validateErrorObj = (status: number, message : string) => ({
   status,
   message,
 });

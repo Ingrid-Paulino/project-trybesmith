@@ -8,3 +8,8 @@ export type Payload = {
 };
 
 export type Secret = string;
+
+export type JwtConfig = {
+  expiresIn: string,
+  algorithm: string,
+};
