@@ -16,4 +16,6 @@ userRoute.post(
   controllerUser.create,
 );
 
+userRoute.get('/', controllerUser.getAll);
+
 export default userRoute;

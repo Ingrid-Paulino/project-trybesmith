@@ -1,15 +1,22 @@
-import loginModel from '../models/loginModel';
-import { ILogin, Login } from '../interfaces/loginInterface';
+import userModel from '../models/userModel';
+import { ILogin } from '../interfaces/loginInterface';
+import validateErrorObj from '../utils';
 
-const create = async ({ username, password }: ILogin): Promise<Login> => {
+const login = async ({ username, password }: ILogin) => {
   // Se houvesse um email, eu poderia dessa forma conferir se ja não existia um usuario com o mesmo
-  // const allUser = await modelUser.getAll();
-  // const filterEmail = allUsers.find(({ i }) => i.id === id);
-  // if (filterEmail) throw...
-  const newLogin = await loginModel.create({ username, password });
-  return newLogin;
+  console.log('oi2');
+  
+  const allUser = await userModel.getAll();
+  const filterEmail = allUser.find(
+    (user) => user.username === username && user.password === password,
+  );
+
+  console.log({ filterEmail });
+  
+  if (!filterEmail) return validateErrorObj(401, 'Username or password invalid');
+  return filterEmail;
 };
   
 export default {
-  create,
+  login,
 };

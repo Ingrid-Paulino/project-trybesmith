@@ -1,9 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { IUser, User } from '../interfaces/userInterface';
-// import { Token } from '../types/typeValidation';
 import { StatusCodes } from '../enum/enumStatusCodes';
 import serviceUser from '../services/userService';
 import createToken from '../services/createToken';
+
+const getAll = async (req: Request, res: Response) => {
+  const users: User[] = await serviceUser.getAll();
+  // console.log({ users });
+  
+  res.status(200).json(users);
+};
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   // const { username, classe, level, password } = req.body as User;
@@ -14,18 +20,15 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   
   try {
     const newUser: User = await serviceUser.create({ username, classe, level, password });
-    console.log({ newUser });
-    
     const { id } = newUser;
     const token = createToken({ id, username });
     res.status(StatusCodes.CREATED).json({ token });
   } catch (error) {
-    console.log({ error });
-    
     next(error);
   }
 };
 
 export default {
   create,
+  getAll,
 };
