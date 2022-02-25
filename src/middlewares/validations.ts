@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { MSG, StatusCodes } from '../enum/enumStatusCodes';
-import { IUser } from '../interfaces/userInterface';
+import { IProduct, IUser } from '../interfaces/interfaces';
 
 const verifyUsername = (req: Request, res: Response, next: NextFunction) => {
   const { username }: IUser = req.body;
@@ -49,10 +49,6 @@ const verifylevel = (req: Request, res: Response, next: NextFunction) => {
     return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.LEVEL_NOT_NUMBER });
   }
 
-  // if (level <= 0) {
-  //   return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.LEVEL_NOT_RIGTH });
-  // }
-
   if (level <= 0) {
     return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.LEVEL_NOT_RIGTH });
   }
@@ -78,9 +74,47 @@ const verifypassword = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const verifynameproduct = (req: Request, res: Response, next: NextFunction) => {
+  const { name }: IProduct = req.body;
+
+  if (!name) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ error: MSG.NOT_NAME });
+  }
+
+  if (typeof name !== 'string') {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.NAME_NOT_STRING });
+  }
+
+  if (name.length <= 2) {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.NAME_SHORT });
+  }
+
+  next();
+};
+
+const verifyamountproduct = (req: Request, res: Response, next: NextFunction) => {
+  const { amount }: IProduct = req.body;
+
+  if (!amount) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ error: MSG.NOT_AMOUNT });
+  }
+
+  if (typeof amount !== 'string') {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.AMOUNT_NOT_STRING });
+  }
+
+  if (amount.length <= 2) {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.AMOUNT_SHORT });
+  }
+
+  next();
+};
+
 export default { 
   verifyUsername,
   verifyclasse,
   verifylevel,
   verifypassword,
+  verifynameproduct,
+  verifyamountproduct,
 };

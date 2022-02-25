@@ -1,10 +1,9 @@
 import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
-import { User, IUser } from '../interfaces/userInterface';
+import { User, IUser } from '../interfaces/interfaces';
 
 const getAll = async (): Promise<User[]> => {
   const [rows] = await connection.execute('SELECT * FROM Trybesmith.Users');
-  // console.log({ rows });
   return rows as User[];
 };
 

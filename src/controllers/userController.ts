@@ -1,13 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { IUser, User } from '../interfaces/userInterface';
+import { IUser, User } from '../interfaces/interfaces';
 import { StatusCodes } from '../enum/enumStatusCodes';
 import serviceUser from '../services/userService';
 import createToken from '../services/createToken';
 
 const getAll = async (req: Request, res: Response) => {
   const users: User[] = await serviceUser.getAll();
-  // console.log({ users });
-  
   res.status(200).json(users);
 };
 

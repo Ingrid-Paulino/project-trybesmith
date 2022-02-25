@@ -1,41 +1,32 @@
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
-// import dotenv from 'dotenv';
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes, MSG } from '../../enum/enumStatusCodes';
-
-// dotenv.config();
-// const { SECRETJWT } = process.env;
+import validateErrorObj from '../../utils';
+// import userModel from '../../models/userModel';
+import { DecodeData } from '../../types/typeValidation';
 
 const SECRET = 'seusecretdetoken';
 
-export default async (req: Request, res: Response) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
+  console.log({ token });
 
-  if (!token) {
-    return res.status(StatusCodes.NOT_FOUND).json(MSG.TOKEN_NOT_FOUND);
+  if (!token || token === '') {
+    return res.status(StatusCodes.UNAUTHORIZED).json(MSG.TOKEN_NOT_FOUND);
   }
 
+  console.log({ token });
+  
   try {
     /* Através o método verify, podemos validar e decodificar o nosso JWT. */
-    const decoded = jwt.verify(token, SECRET);
-  
-    return decoded;
-    // console.log('decoded', decoded);
+    const decoded = jwt.verify(token, SECRET) as DecodeData;
+    console.log('decoded', decoded);
+    console.log(req.body);
 
-    // Quando eu fizer o FindById eu volto aqui
-    // const user = await User.findOne({ where: { email: decoded.data } });
-    // console.log('decoded', user);
+    req.body = { idUser: decoded.data.id, ...req.body };
 
-    // if (!user) {
-    //   return res.status(404).json({ message: 'User does not exist' });
-    // }
-
-    // req.email = decoded.data;
-    // ou se não tivesse o decode.data.email la no findOne
-    // req.user = user;
-
-    // console.log('req', req);
+    next();
   } catch (err) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    next(validateErrorObj(StatusCodes.UNAUTHORIZED, MSG.TOKEN_INVALID));
   }
 };

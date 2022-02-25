@@ -13,3 +13,10 @@ export type JwtConfig = {
   expiresIn: string,
   algorithm: string,
 };
+
+export type DecodeData = {
+  data: {
+    id: number,
+    username: string,
+  }
+};

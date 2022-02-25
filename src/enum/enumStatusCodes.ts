@@ -13,6 +13,7 @@ export enum StatusCodes {
 export enum MSG {
   POST_NOT_FOUND = 'Post no found',
   TOKEN_NOT_FOUND = 'Token not found',
+  TOKEN_INVALID = 'Invalid token',
 
   NOT_CREATE_USER = 'User not created',
   USER_CREATED = 'User created',
@@ -33,4 +34,11 @@ export enum MSG {
   PASSWORD_NOT_STRING = 'Password must be a string',
   PASSWORD_SHORT = 'Password must be longer than 7 characters',
 
+  NOT_NAME = 'Name is required',
+  NAME_NOT_STRING = 'Name must be a string',
+  NAME_SHORT = 'Name must be longer than 2 characters',
+
+  NOT_AMOUNT = 'Amount is required',
+  AMOUNT_NOT_STRING = 'Amount must be a string',
+  AMOUNT_SHORT = 'Amount must be longer than 2 characters',
 }
