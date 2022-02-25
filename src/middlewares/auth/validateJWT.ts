@@ -12,7 +12,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   console.log({ token });
 
   if (!token || token === '') {
-    return res.status(StatusCodes.UNAUTHORIZED).json(MSG.TOKEN_NOT_FOUND);
+    return next(validateErrorObj(StatusCodes.UNAUTHORIZED, MSG.TOKEN_NOT_FOUND));
   }
 
   console.log({ token });
