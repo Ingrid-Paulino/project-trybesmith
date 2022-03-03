@@ -21,6 +21,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     // console.log(req.body);
 
     req.body = { idUser: decoded.data.id, ...req.body };
+    
     next();
   } catch (err) {
     next(validateErrorObj(StatusCodes.UNAUTHORIZED, MSG.TOKEN_INVALID));

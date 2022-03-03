@@ -20,6 +20,18 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// const update = async (req: Request, res: Response, next: NextFunction) => {
+//   const { id } = req.params;
+//   // const { name, quantity } = req.body;
+//   const uupdateProduct = { id, ...req.body };
+  
+//   const product = await productService.updateProduct(uupdateProduct);
+
+//   if ('status' in product) return next(product);
+
+//   return res.status(200).json(product);
+// };
+
 export default {
   create,
   getAll,

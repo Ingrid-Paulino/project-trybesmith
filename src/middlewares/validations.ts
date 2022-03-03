@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { MSG, StatusCodes } from '../enum/enumStatusCodes';
-import { IProduct, IUser } from '../interfaces/interfaces';
+import { IProduct, IUser, IProducts } from '../interfaces/interfaces';
 
 const verifyUsername = (req: Request, res: Response, next: NextFunction) => {
   const { username }: IUser = req.body;
@@ -110,6 +110,31 @@ const verifyamountproduct = (req: Request, res: Response, next: NextFunction) =>
   next();
 };
 
+const verifyproducts = (req: Request, res: Response, next: NextFunction) => {
+  const { products }: IProducts = req.body;
+
+  if (!products) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ error: MSG.NOT_PRODUCTS });
+  }
+
+  if (typeof products !== 'object') {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.PRODUCTS_NOT_ARRAY });
+  }
+
+  const productsArray = products.find((p) => typeof p !== 'number');
+  // console.log({ productsArray });
+
+  if (productsArray !== undefined) {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.PRODUCTS_NOT_ARRAY });
+  }
+
+  if (!products.length) {
+    return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.PRODUCTS_SHORT });
+  }
+
+  next();
+};
+
 export default { 
   verifyUsername,
   verifyclasse,
@@ -117,4 +142,5 @@ export default {
   verifypassword,
   verifynameproduct,
   verifyamountproduct,
+  verifyproducts,
 };

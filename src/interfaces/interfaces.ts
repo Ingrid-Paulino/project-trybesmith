@@ -26,3 +26,13 @@ export interface IProduct {
 export interface Product extends IProduct {
   id: number,
 }
+
+export interface IProducts {
+  userId?: number,
+  products: number[],
+  idUser?: number
+}
+
+export interface Products extends IProducts {
+  id: number,
+}

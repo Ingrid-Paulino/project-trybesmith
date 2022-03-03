@@ -22,7 +22,17 @@ const create = async ({ name, amount }: IProduct): Promise<Product> => {
   return { id, name, amount };
 };
 
+// const update = async ({ products }: IProducts): Promise<Products> => {
+//   const updateProduct = products.map(async (produto) => {
+//     const query2 = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
+//     await connection.execute(query2, [id, produto])
+
+//   })
+
+// };
+
 export default {
   create,
   getAll,
+  // update,
 };
