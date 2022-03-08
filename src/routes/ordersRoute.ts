@@ -8,5 +8,7 @@ const ordersRoute = express.Router({ mergeParams: true });
 ordersRoute.use(validateJWT);
 
 ordersRoute.post('/', validation.verifyproducts, ordersController.create);
+ordersRoute.get('/', ordersController.getAll);
+ordersRoute.get('/:id', ordersController.getById);
 
 export default ordersRoute;

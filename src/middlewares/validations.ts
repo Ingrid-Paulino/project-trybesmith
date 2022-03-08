@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { MSG, StatusCodes } from '../enum/enumStatusCodes';
-import { IProduct, IUser, IProducts } from '../interfaces/interfaces';
+import { IProduct, IUser, IOrder } from '../interfaces/interfaces';
 
 const verifyUsername = (req: Request, res: Response, next: NextFunction) => {
   const { username }: IUser = req.body;
@@ -111,7 +111,7 @@ const verifyamountproduct = (req: Request, res: Response, next: NextFunction) =>
 };
 
 const verifyproducts = (req: Request, res: Response, next: NextFunction) => {
-  const { products }: IProducts = req.body;
+  const { products }: IOrder = req.body;
 
   if (!products) {
     return res.status(StatusCodes.BAD_REQUEST).json({ error: MSG.NOT_PRODUCTS });
@@ -122,7 +122,6 @@ const verifyproducts = (req: Request, res: Response, next: NextFunction) => {
   }
 
   const productsArray = products.find((p) => typeof p !== 'number');
-  // console.log({ productsArray });
 
   if (productsArray !== undefined) {
     return res.status(StatusCodes.UNPROCCESSABLE_ENTITY).json({ error: MSG.PRODUCTS_NOT_ARRAY });

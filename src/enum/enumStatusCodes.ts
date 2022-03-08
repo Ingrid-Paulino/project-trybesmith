@@ -45,4 +45,6 @@ export enum MSG {
   NOT_PRODUCTS = 'Products is required',
   PRODUCTS_NOT_ARRAY = 'Products must be an array of numbers',
   PRODUCTS_SHORT = 'Products can\'t be empty',
+
+  ORDER_NOT_FOUND = 'Order not found',
 }

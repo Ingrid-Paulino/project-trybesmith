@@ -20,3 +20,13 @@ export type DecodeData = {
     username: string,
   }
 };
+
+export type ObjectUserId = {
+  userId: number
+};
+
+export type ObjectProducts = {
+  products: number
+};
+
+export type AA = string & number;
