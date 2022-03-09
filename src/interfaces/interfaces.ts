@@ -1,4 +1,4 @@
-import { ObjectUserId, ObjectProducts } from '../types/typeValidation';
+import { ObjectUserId, ObjectProducts, ObjOrderProducts } from '../types/typeValidation';
 
 export interface IUser {
   username: string,
@@ -64,4 +64,7 @@ export interface IOrderProducts {
 
 export interface OrderProducts extends IOrderProducts {
   id: number,
+}
+export interface IOrderGetAll {
+  row: ObjOrderProducts[]
 }

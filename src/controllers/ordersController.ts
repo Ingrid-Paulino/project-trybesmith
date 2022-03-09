@@ -27,8 +27,6 @@ const getById = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAll = async (req: Request, res: Response) => {
-  console.log('oi1');
-  
   const order = await ordersService.getAll();
   res.status(200).json(order);
 };

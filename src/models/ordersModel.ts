@@ -1,6 +1,6 @@
 import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
-import { IOrder, OrderById } from '../interfaces/interfaces';
+import { IOrder, OrderById, IOrderGetAll } from '../interfaces/interfaces';
 
 const create = async ({ idUser, products }: IOrder): Promise<IOrder> => {
   const query = 'INSERT INTO Trybesmith.Orders (userId) '
@@ -53,31 +53,32 @@ const getById = async (id: number) => {
 };
 
 const getAll = async () => {
-  const query = 'SELECT * FROM Trybesmith.Orders';
-  const [userId] = await connection.execute(query);
-  console.log({ userId });
+  // const query = 'SELECT * FROM Trybesmith.Orders';
+  // const [userId] = await connection.execute(query);
+  // console.log({ userId });
 
-  const query2 = `SELECT
-  P.id AS products
-  FROM Trybesmith.Orders AS O
-  INNER JOIN Trybesmith.Products AS P
-  ON O.id = P.orderId
-  ORDER BY P.orderId
-  `;
-
-  //   const query = `SELECT
-  //   O.id,
-  //   O.userId,
-  //   P.id AS products
+  // const query2 = `SELECT
+  // P.id AS products
   // FROM Trybesmith.Orders AS O
   // INNER JOIN Trybesmith.Products AS P
-  //   ON O.id = P.orderId
-  //   WHERE O.id = ?
+  // ON O.id = P.orderId
   // ORDER BY P.orderId
   // `;
 
-  const [row] = await connection.execute(query2);
-  return { userId, row } as unknown as OrderById;
+  const query = `SELECT
+    O.id,
+    O.userId,
+    P.id AS products
+  FROM Trybesmith.Orders AS O
+  INNER JOIN Trybesmith.Products AS P
+    ON O.id = P.orderId
+  GROUP BY O.id, P.id
+  `;
+
+  const [row] = await connection.execute(query);
+  console.log({ row });
+  
+  return { row } as unknown as IOrderGetAll;
 };
 
 export default {

@@ -30,3 +30,15 @@ export type ObjectProducts = {
 };
 
 export type AA = string & number;
+
+export type ObjOrderProducts = {
+  id: number,
+  userId: number,
+  products: number[]
+};
+
+export type Test = {
+  id: number,
+  userId: number,
+  products: number
+};
